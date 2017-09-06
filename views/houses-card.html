@@ -1,0 +1,52 @@
+<!-- Custom Directive of Houses Section -->
+
+<div ng-if="detail.url.indexOf('houses') != -1" id="house-names" class="custom-card">
+
+<!-- Display Heading Houses -->
+
+	<div ng-if="detail == 'HOUSES'" class="text-center">
+		
+		<br><h3>{{detail}}</h3><hr><br>
+
+		<div class="row heading-row">
+			
+			<div class="hidden-xs-down col-sm-6 col-md-6 col-lg-6">
+			
+				<strong>HOUSE-NAME</strong>
+			
+			</div>
+			
+			<div class="hidden-xs-down col-sm-6 col-md-6 col-lg-6">
+			
+				<strong>REGION</strong>
+			
+			</div>
+			
+		</div>
+
+	</div>
+
+<!-- Display the List of Houses -->
+
+	<a ng-click="allDetails.whichCategory(detail.url);allDetails.passHouseInfo(detail.url,detail.name,detail.region,detail.coatOfArms, detail.words,detail.titles, detail.seats,detail.currentLord,detail.heir,detail.overlord,detail.founded,detail.founder,detail.diedOut,detail.ancestralWeapons,detail.cadetBranches,detail.swornMembers)" data-ng-href="#/allinfo/{{detail.url.split('/')[4]}}-{{detail.name |removeSpaces| lowercase}}" data-target="#allinfo/{{detail.url.split('/')[4]}}-{{detail.name |removeSpaces| lowercase}}">
+
+
+		<div class="row content-row" ng-if="detail.url != undefined">
+			
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 name-col">
+			
+				{{detail.name}}
+			
+			</div>
+			
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-if='detail.region != ""'>
+			
+				In&nbsp;{{detail.region}}
+			
+			</div>
+		
+		</div>
+
+	</a>
+		
+</div>

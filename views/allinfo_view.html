@@ -1,0 +1,188 @@
+<!-- ALL INFORMATION PAGE -->
+ 
+<!-- General Filters --> 
+
+<div class="container view-section" ng-init="allDetails.loadDetails()" id="all-info">
+
+    <div class="loader"  ng-if="allDetails.hideloader"><div class="loader-inner"></div></div>
+		
+	<div class="row row-space">
+            
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-if="allDetails.showFilter">
+              
+            <label>Filter By Category</label> 
+
+            <select id="selectedCategory" ng-model="allDetails.charmodel" ng-change="allDetails.checkCategory(allDetails.charmodel)">
+                
+				<option selected value="All Categories">All Categories</option>
+				   
+				<option value="Books">Books</option>
+				   
+				<option value="Characters">Characters</option>
+					
+				<option value="Houses">Houses</option>
+               
+			</select>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-if="allDetails.showFilter">
+              
+            <label>Sort Alphabetically</label> 
+
+            <select id="sortedReverse" ng-model="allDetails.sort" ng-change="allDetails.checkOrder(allDetails.sort)">
+                
+				<option selected value="Forward">Forward</option>
+				   
+				<option value="Reverse">Reverse</option>
+               
+          	</select>
+
+        </div>
+                     
+    </div>
+
+<!-- Filters of Books -->
+
+    <div class="row row-space">
+            
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Books'">
+              
+            <label>Filter By Author</label> 
+
+            <select id="selectedAuthor" ng-model="allDetails.author" ng-change="allDetails.checkAuthor(allDetails.author)">
+                
+				<option ng-repeat="author in allDetails.authors" value="{{author}}">{{author}}</option>
+            
+            </select>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Books'">
+              
+            <label>Filter By Publisher</label> 
+
+            <select id="selectedPublisher" ng-model="allDetails.publish" ng-change="allDetails.checkPublisher(allDetails.publish)">
+                
+				<option ng-repeat="pub in allDetails.publishers track by $index" value="{{pub}}">{{pub}}</option>
+            
+            </select>
+
+        </div>
+
+                     
+    </div>
+
+    <div class="row row-space">
+            
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Books'">
+              
+            <label>Filter By MediaType</label> 
+
+            <select id="selectedMediaType" ng-model="allDetails.mediatype" ng-change="allDetails.checkMediaType(allDetails.mediatype)">
+                
+				<option ng-repeat="media in allDetails.mediatypes" value="{{media}}">{{media}}</option>
+            
+            </select>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Books'">
+              
+            <label>Books by Decade</label> 
+
+            <select id="selectedDecade" ng-model="allDetails.decade" ng-change="allDetails.checkDecade(allDetails.decade)">
+                
+				<option ng-repeat="presentdecade in allDetails.alldecades" value="{{presentdecade}}">{{presentdecade}}</option>
+            
+            </select>
+
+        </div>
+
+     </div>
+    
+ <!-- Filters Of Characters -->
+ 
+	 <div class="row row-space">
+            
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Characters'">
+              
+            <label>Filter By Gender</label> 
+
+            <select id="selectedGender" ng-model="allDetails.gender" ng-change="allDetails.checkGender(allDetails.gender)">
+                
+				<option ng-repeat="currentgender in allDetails.allgenders" value="{{currentgender}}">{{currentgender}}</option>
+            
+            </select>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Characters'">
+              
+            <label>Filter by Culture</label> 
+
+            <select id="selectedCulture" ng-model="allDetails.culture" ng-change="allDetails.checkCulture(allDetails.culture)">
+                
+				<option ng-repeat="presentculture in allDetails.allcultures" value="{{presentculture}}">{{presentculture}}</option>
+            
+            </select>
+
+        </div>
+                 
+    </div>
+	
+<!-- Filters of Houses -->
+
+    <div class="row row-space">
+            
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Houses'">
+              
+            <label>Filter by Region</label> 
+
+            <select id="selectedRegion" ng-model="allDetails.region" ng-change="allDetails.checkRegion(allDetails.region)">
+                
+				<option ng-repeat="currentregion in allDetails.allregions" value="{{currentregion}}">{{currentregion}}</option>
+            
+            </select>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  ng-if="allDetails.charmodel == 'Houses'">
+              
+            <label>Houses Diedout</label> 
+
+            <select id="selectedDiedOut" ng-model="allDetails.died" ng-change="allDetails.checkDiedOut(allDetails.died)">
+                
+				<option ng-repeat="hasdiedout in allDetails.diedOutHouses" value="{{hasdiedout}}">{{hasdiedout}}</option>
+            
+            </select>
+
+        </div>
+
+	</div>
+	
+<!-- Reset All Button -->
+
+    <div class="row row-space" id="reset-btn">
+       
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"  ng-if="allDetails.showFilter">
+
+			<a class="btn btn-primary" data-ng-href="#/allinfo" data-target="#allinfo" role="button" ng-click="allDetails.resetAllFilters()">Reset All&nbsp;<i class="fa fa-refresh" aria-hidden="true"></i></a>
+
+        </div>
+         
+    </div>  
+
+<!-- Custom Directives -->	
+
+    <div ng-repeat="detail in allDetails.allItems | mediaTypeFilter | publisherFilter | authorFilter | decadeFilter | cultureFilter | genderFilter  | diedoutFilter | regionFilter track by $index">
+        
+		<book-card ng-show="allDetails.charmodel == 'Books' || allDetails.charmodel == 'All Categories'"></book-card>
+            
+		<character-card ng-show="allDetails.charmodel == 'Characters' || allDetails.charmodel == 'All Categories'"></character-card>
+          
+		<house-card ng-show="allDetails.charmodel == 'Houses' || allDetails.charmodel == 'All Categories'"></house-card>
+        
+	</div>
+    
+ </div>

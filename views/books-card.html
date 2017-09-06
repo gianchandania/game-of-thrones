@@ -1,0 +1,47 @@
+<!-- Custom Directive for Books -->
+
+<div ng-if="detail.url.indexOf('books') != -1" id="book-view" class="custom-card">
+	
+<!-- Display Heading Books -->
+
+	<div class="panel panel-primary" ng-if="detail == 'BOOKS'">
+		
+		<div class="panel-heading">
+		
+			{{detail}}<br>
+		
+		</div>
+
+	</div>
+
+<!-- Display the List of Books -->
+
+	<a ng-click="allDetails.whichCategory(detail.url);allDetails.passBookInfo(detail.url,detail.name,detail.isbn,detail.authors, detail.numberOfPages,detail.publisher, detail.country,detail.mediaType,detail.released,detail.characters,detail.povCharacters)" data-ng-href="#/allinfo/{{detail.url.split('/')[4]}}-{{detail.name |removeSpaces| lowercase}}" data-target="#allinfo/{{detail.url.split('/')[4]}}-{{detail.name | removeSpaces | lowercase}}">
+	
+		<div class="panel panel-default" ng-if="detail.url != undefined">
+
+			<div class="panel-body">
+
+			  <div class="row">
+				
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					
+						{{detail.name}}
+				  
+					</div>
+				 
+					<div style="text-align: left;" class="col-xs-6 col-sm-6 col-md-5 col-lg-5 author-name">
+						
+						by&nbsp;<span ng-repeat="author in detail.authors">{{author+" "}} </span>
+				  
+					</div>
+			  
+			  </div>
+		
+			</div>
+		
+		</div>
+	
+	</a>
+	
+</div>

@@ -1,0 +1,31 @@
+<!-- Custom Directive of Characters Section -->
+
+<div ng-if="detail.url.indexOf('characters') != -1 " id="char-view" class="custom-card">
+
+<!-- Display Heading Characters -->
+<div class="text-center" ng-if="detail == 'CHARACTERS'"><br><h3>{{detail}}</h3><hr><br></div>
+	
+<!-- Display the List of Characters -->
+
+	<ul class="list-group">
+	
+		<a ng-click="allDetails.whichCategory(detail.url);allDetails.passCharInfo(detail.url,detail.name,detail.gender,detail.culture,detail.born, detail.died,detail.titles, detail.aliases,detail.father,detail.mother,detail.spouse,detail.allegiances,detail.books,detail.povBooks,detail.tvSeries,detail.playedBy)" data-ng-href="#/allinfo/{{detail.url.split('/')[4]}}-{{(detail.name != '')?detail.name:detail.aliases[0] |removeSpaces| lowercase}}" data-target="#allinfo/{{detail.url.split('/')[4]}}-{{(detail.name != '')?detail.name:detail.aliases[0] |removeSpaces| lowercase}}">
+
+		  <li ng-if="detail.url != undefined" class="list-group-item"><span ng-if="detail.name != ''">{{detail.name | uppercase}}</span><span ng-if="detail.name == ''">{{detail.aliases[0] | uppercase}}</span>	</li>
+		
+		</a>
+
+	</ul>
+
+</div>
+
+
+
+
+
+
+
+	
+
+
+	

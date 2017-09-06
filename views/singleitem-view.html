@@ -1,0 +1,681 @@
+<!-- Single Category Page -->
+<div id="single-info">
+
+<div class="container view-section" >
+    
+    <div class="book-view" ng-if="singleDetail.callType == 'books'" ng-init="singleDetail.loadInfoBooks()">
+                
+        <div class="text-center book-field"><h3>{{singleDetail.bookDetails.heading | uppercase}} </h3></div><br>
+
+            <div class="row book-field">
+                
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                 
+                    <label class="name-field">Name</label>
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                    {{singleDetail.bookDetails.name}} 
+                
+                </div>
+                
+            </div>
+
+            <div class="row book-field">
+               
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+                    <label class="name-field">ISBN</label>
+               
+                </div>
+               
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               
+                    {{singleDetail.bookDetails.isbn}} 
+                
+                </div>
+                
+            </div>
+
+            <div class="row book-field">
+                
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                    <label class="name-field">Authors</label> 
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                 
+                    <span ng-repeat="author in singleDetail.bookDetails.authors track by $index">{{author}}</span> 
+                
+                </div>
+                
+            </div>
+
+            <div class="row book-field">
+             
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+             
+                   <label class="name-field">Number Of Pages</label> 
+             
+                </div>
+             
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+             
+                   {{singleDetail.bookDetails.noOfPages}} 
+                
+                </div>
+                
+            </div>
+
+            <div class="row book-field">
+            
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+                   <label class="name-field">Publisher</label>
+            
+                </div>
+            
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            
+                   {{singleDetail.bookDetails.publisher}} 
+                
+                </div>
+                
+            </div>
+
+            <div class="row book-field">
+              
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+              
+                   <label class="name-field">Country</label>
+              
+                </div>
+              
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+              
+                   {{singleDetail.bookDetails.country}}
+                
+                </div>
+                
+            </div>
+
+            <div class="row book-field">
+            
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+                   <label class="name-field">Format</label>
+            
+                </div>
+            
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            
+                   {{singleDetail.bookDetails.mediaType}}
+                
+                </div>
+           
+            </div>
+
+            <div class="row book-field">
+            
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+                   <label class="name-field">Released</label> 
+            
+                </div>
+            
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            
+                   {{singleDetail.bookDetails.released | date:'medium'}}
+                
+                </div>
+            
+            </div>
+               
+            <div class="row book-field" ng-if='singleDetail.bookDetails.povCharacters != ""'>
+            
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+                   <label class="name-field">Pov-Characters</label>
+            
+                </div>
+            
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            
+                   <span ng-repeat="povchar in singleDetail.povcharacters track by $index">{{povchar}}</span>
+
+                </div>
+            
+            </div>
+                
+            <div class="row book-field" ng-if='singleDetail.bookDetails.characters != ""'>
+            
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+                   <label class="name-field">Characters</label>
+            
+                </div>
+            
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                  <span ng-if="!singleDetail.showDiv" ng-repeat="char in singleDetail.characters | limitTo:10 track by $index">{{char}}</span>
+
+                  <span ng-if="singleDetail.showDiv" ng-repeat="char in singleDetail.characters track by $index">{{char}}</span> 
+
+                  <br><div><a ng-if="!singleDetail.showDiv" ng-click="singleDetail.clickOnMore()">View More</a>
+                  <a ng-click="singleDetail.clickOnLess()" ng-if="singleDetail.showDiv">View Less</a></div>
+                  
+                </div>
+            
+            </div>
+
+    </div>
+
+    <div class="character-view" ng-if="singleDetail.callType == 'characters'" ng-init="singleDetail.loadInfoChar()">
+                
+        <div class="text-center char-field"><h3>{{singleDetail.charDetails.heading | uppercase}} </h3></div><br>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.name != ""'>
+            
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                <label class="name-field">Name</label>
+                
+            </div>
+            
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                {{singleDetail.charDetails.name}}
+                
+            </div>
+        
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.gender != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                  
+                <label class="name-field">Gender</label>
+                
+            </div>
+            
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                {{singleDetail.charDetails.gender}} 
+                
+            </div>
+                
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.culture != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                  
+                <label class="name-field">Culture</label>
+                
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                {{singleDetail.charDetails.culture}}
+                
+            </div>
+        
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.born != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                  
+                <label class="name-field">Born</label>
+                
+            </div>
+            
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                   
+                {{singleDetail.charDetails.born}}
+                
+            </div>
+               
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.died != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                <label class="name-field">Died</label>
+            
+            </div>
+               
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                   
+                {{singleDetail.charDetails.died}}
+                
+            </div>
+                
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.titles[0] != ""'>
+                
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                  <label class="name-field">Titles</label>
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                  
+                   <span ng-repeat="title in singleDetail.charDetails.titles track by $index">{{title}}</span> 
+
+                </div>
+        
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.aliases[0] != ""'>
+               
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+                  <label class="name-field">Aliases</label>
+               
+                </div>
+               
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            
+                   <span ng-repeat="alias in singleDetail.charDetails.aliases track by $index">{{alias}}</span>
+               
+                </div>
+               
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.father != ""'>
+                
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                  <label class="name-field">Father</label>
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                  {{singleDetail.father}}
+                
+                </div>
+                
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.mother != ""'>
+             
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+             
+                  <label class="name-field">Mother</label>
+             
+                </div>
+             
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+             
+                  {{singleDetail.mother}}
+              
+                </div>
+              
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.spouse != ""'>
+           
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+           
+                  <label class="name-field">Spouse</label>
+           
+                </div>
+           
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+           
+                  {{singleDetail.spouse}}
+            
+                </div>
+            
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.allegiances != ""'>
+           
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+           
+                  <label class="name-field">Allegiances</label>
+            
+                </div>
+            
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+
+                  <span ng-repeat="allegiance in singleDetail.allegiance track by $index">{{allegiance}}</span>
+
+                </div>
+                
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.books != ""'>
+                
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                  <label class="name-field">Books</label>
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                  <span ng-repeat="book in singleDetail.books track by $index">{{book}}</span>
+                
+                </div>
+                
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.povBooks != ""'>
+                
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                  <label class="name-field">Pov-Books</label>
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                  <span ng-repeat="povbook in singleDetail.povBooks track by $index">{{povbook}}</span>
+                
+                </div>
+                
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.tvSeries[0] != ""'>
+               
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+                  <label class="name-field">TV-Series</label>
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+    
+                  <span ng-repeat="tvseries in singleDetail.charDetails.tvSeries track by $index">{{tvseries}}</span>
+                
+                </div>
+                
+        </div>
+
+        <div class="row char-field" ng-if='singleDetail.charDetails.playedBy[0] != ""'>
+               
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+                  <label class="name-field">Played By</label>
+                
+                </div>
+                
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                  {{singleDetail.charDetails.playedBy[0]}}
+                
+                </div>
+                
+        </div>
+
+    </div>
+        
+    <div class="house-view" ng-if="singleDetail.callType == 'houses'" ng-init="singleDetail.loadInfoHouses()">
+                
+        <div class="text-center house-field"><h3>{{singleDetail.houseDetails.heading | uppercase}} </h3></div><br>
+        
+        <div class="row house-field" ng-if='singleDetail.houseDetails.name != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                <label class="name-field">Name</label>
+            
+            </div>
+            
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+              
+                {{singleDetail.houseDetails.name}}
+            
+            </div>
+        
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.region != ""'>
+            
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                 
+                <label class="name-field">Region</label>
+                
+            </div>
+            
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                {{singleDetail.houseDetails.region}}
+                
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.coatOfArms != ""'>
+            
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                <label class="name-field">Coat of Arms</label>
+                
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               
+                {{singleDetail.houseDetails.coatOfArms}}
+               
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.words != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                 
+                <label class="name-field">Words</label>
+                
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                {{singleDetail.houseDetails.words}}
+            
+            </div>
+               
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.titles[0] != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                
+                <label class="name-field">Titles</label>
+                
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                 
+                 <span ng-repeat="title in singleDetail.houseDetails.titles track by $index">{{title}}</span>
+            
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.seats[0] != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+                <label class="name-field">Seats</label>
+                
+            </div>
+            
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                <span ng-repeat="seat in singleDetail.houseDetails.seats track by $index">{{seat}}</span>
+
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.currentLord != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+               <label class="name-field">Current Lord</label>
+            
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+              
+                {{singleDetail.currentlord}}
+              
+            </div>
+                
+        </div>
+                
+        <div class="row house-field" ng-if='singleDetail.houseDetails.heir != ""'>
+            
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+               <label class="name-field">Heir</label>
+            
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               
+                {{singleDetail.heir}}
+               
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.overlord != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+             
+               <label class="name-field">Overlord</label>
+            
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               
+                {{singleDetail.overlord}}
+               
+            </div>
+               
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.founded != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+               <label class="name-field">Founded</label>
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               
+                {{singleDetail.houseDetails.founded}}
+            
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.founder != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+               <label class="name-field">Founder</label>
+               
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                {{singleDetail.founder}}
+            
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.diedOut != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+               
+                <label class="name-field">Died Out</label>
+                
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                {{singleDetail.houseDetails.diedOut}}
+                
+            </div>
+            
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.ancestralWeapons[0] != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            
+               <label class="name-field">Ancestral Weapons</label>
+                
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               
+               <span ng-repeat="ancestral in singleDetail.houseDetails.ancestralWeapons track by $index">{{ancestral}}</span>
+
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.cadetBranches != ""'>
+                
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+              
+               <label class="name-field">Cadet Branches</label>
+            
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                
+                <span ng-repeat="cadetbranch in singleDetail.cadetbranches track by $index">{{cadetbranch}}</span>
+            
+            </div>
+                
+        </div>
+
+        <div class="row house-field" ng-if='singleDetail.houseDetails.swornMembers != ""'>
+            
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+              
+              <label class="name-field">Sworn Members</label>
+                
+            </div>
+                
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+               
+               <span ng-repeat="swornmember in singleDetail.swornmembers track by $index">{{swornmember}}</span>
+                
+            </div>
+                
+        </div>
+
+    </div>
+
+        <div class="row row-space">
+        
+            <div class="col-xs-12 col-sm-10 col-md-12 col-lg-12">
+                        
+                <a id="back-button" class="btn btn-primary" data-ng-href="#/allinfo" data-target="#allinfo" role="button">All Content&nbsp;<i class="fa 
+                        fa-angle-double-left" aria-hidden="true"></i></a>
+
+            </div>
+         
+        </div>
+
+</div>
+
+</div>

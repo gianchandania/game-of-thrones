@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="gotApp">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+    
+    <meta name="author" content="">
+
+    <title>Game Of Thrones</title>
+
+    <link href="img/favicon.ico" rel=icon type=image/x-icon>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top" ng-cloak>
+
+    <!-- Navigation -->
+    
+    <div ng-if="location.path() !== '/'" id="nav-parent" ng-cloak>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    
+      <a class="navbar-brand" data-ng-href="#/" data-target="#">Game Of Thrones</a>
+    
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+    
+        <i class="fa fa-bars"></i>
+    
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+    
+        <ul class="nav navbar-nav ml-auto">
+    
+          <li class="nav-item">
+    
+            <a class="nav-link" data-ng-href="#/" data-target="#" id="homelink">Home</a>
+    
+          </li>
+    
+          <li class="nav-item">
+    
+            <a class="nav-link" data-ng-href="#/about" data-target="#about" id="aboutlink">About</a>
+    
+          </li>
+    
+          <li class="nav-item">
+    
+            <a class="nav-link" data-ng-href="#/allinfo" data-target="#allinfo" id="contentlink">All Content</a>
+    
+          </li>
+    
+        </ul>
+    
+      </div>
+    
+    </nav>
+    
+    </div>
+
+    <div ng-view >
+
+           
+    </div>
+
+    <!-- Footer -->
+    <div ng-if="location.path() !== '/'" ng-controller="footerController as myFooter" ng-cloak ng-show="myFooter.footerLoaded">
+    
+    <footer>
+    
+      <div class="container-fluid">
+    
+        <div class="row">
+    
+          <div class="col-md-4">
+    
+            <span class="copyright">Copyright &copy; Game Of Thrones 2017</span>
+    
+          </div>
+    
+          <div class="col-md-4">
+    
+            <ul class="list-inline social-buttons">
+    
+              <li class="list-inline-item">
+    
+                <a href="#" onclick="return false;">
+    
+                  <i class="fa fa-twitter"></i>
+    
+                </a>
+    
+              </li>
+    
+              <li class="list-inline-item">
+    
+                <a href="#" onclick="return false;">
+    
+                  <i class="fa fa-facebook"></i>
+    
+                </a>
+    
+              </li>
+    
+              <li class="list-inline-item">
+    
+                <a href="#" onclick="return false;">
+    
+                  <i class="fa fa-linkedin"></i>
+    
+                </a>
+    
+              </li>
+    
+            </ul>
+    
+          </div>
+    
+          <div class="col-md-4">
+    
+            <ul class="list-inline quicklinks">
+    
+              <li class="list-inline-item">
+    
+                <a href="#" onclick="return false;">Privacy Policy</a>
+    
+              </li>
+    
+              <li class="list-inline-item">
+    
+                <a href="#" onclick="return false;">Terms of Use</a>
+    
+              </li>
+    
+            </ul>
+    
+          </div>
+    
+        </div>
+    
+      </div>
+    
+    </footer>
+    
+    </div>
+    
+    <!-- Bootstrap core JavaScript -->
+    
+    <script src="vendor/jquery/jquery.min.js"></script>
+    
+    <script src="vendor/popper/popper.min.js"></script>
+    
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Plugin JavaScript -->
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+
+    <script src="js/agency.js"></script>
+
+    <!-- Scripts related to Angular  -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+
+    <script type="text/javascript" src="angular/app.js"></script>
+
+    <script type="text/javascript" src="angular/services/gotService.js"></script>
+
+    <script type="text/javascript" src="angular/services/passData.js"></script>
+
+    <script type="text/javascript" src="angular/directives/allDirectives.js"></script>
+
+    <script type="text/javascript" src="angular/controllers/navfooterController.js"></script>
+
+    <script type="text/javascript" src="angular/controllers/mainController.js"></script>
+
+    <script type="text/javascript" src="angular/controllers/singleDetailController.js"></script>
+
+    <script type="text/javascript" src="angular/filters/allFilters.js"></script>
+    
+    <script type="text/javascript" src="angular/routes.js"></script>
+  
+  </body>
+
+</html>
