@@ -1,9 +1,11 @@
 /*Controller for the First View with all the Categories*/
 
-myApp.controller('mainController',['$timeout','GotService','$routeParams','$location','$filter','gotDetails','gotPublisher','gotMedia','gotDecade','gotGender','gotCulture','gotRegion','gotDiedOut','gotCategory','gotBooks','gotCharacters','gotHouses','gotWhichCategory','$q', function($timeout,GotService,$routeParams,$location,$filter,gotDetails,gotPublisher,gotMedia,gotDecade,gotGender,gotCulture,gotRegion,gotDiedOut,gotCategory,gotBooks,gotCharacters,gotHouses,gotWhichCategory,$q) { 
+myApp.controller('mainController',['GotService','$routeParams','$location','gotDetails','gotPublisher','gotMedia','gotDecade','gotGender','gotCulture','gotRegion','gotDiedOut','gotCategory','gotBooks','gotCharacters','gotHouses','gotWhichCategory','gotPassItems','$q', function(GotService,$routeParams,$location,gotDetails,gotPublisher,gotMedia,gotDecade,gotGender,gotCulture,gotRegion,gotDiedOut,gotCategory,gotBooks,gotCharacters,gotHouses,gotWhichCategory,gotPassItems,$q) { 
 
 //create a context
   var main = this;
+
+  this.viewChange = "";
 
   this.totalCharacter = 43;
     
@@ -32,66 +34,76 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
   //Author Filter
   
   this.authors = ["All Authors"];
-    
-  this.author = this.authors[0];
 
-  gotDetails.setAuthor(this.author);
-  
+  this.author = this.authors[0];
+    
   //Publisher Filter
   
   this.publishers = ["All Publishers"];
-    
+
   this.publish = this.publishers[0];
-    
-  gotPublisher.setPublisher(this.publish); 
-  
+
   //MediaType Filter
   
   this.mediatypes = ["All MediaTypes"];
-    
+
   this.mediatype = this.mediatypes[0];
-    
-  gotMedia.setMediaType(this.mediatype);
-  
+
   //Decade Filter
   
   this.alldecades = ["All Decades", "Books of decade 1990's", "Books of decade 2000's", "Books of decade 2010's"];
-    
+
   this.decade = this.alldecades[0];
-    
-  gotDecade.setDecade(this.decade);
   
   //Gender Filter
   
   this.allgenders = ["All Genders"];
-    
+
   this.gender = this.allgenders[0];
-    
-  gotGender.setGender(this.gender);
-    
+  
   //Culture Filter
   
   this.allcultures = ["All Cultures"];
-    
+
   this.culture = this.allcultures[0];
     
-  gotCulture.setCulture(this.culture);
-  
   //Region Filter
   
   this.allregions = ["All Regions"];
-    
+
   this.region = this.allregions[0];
-    
-  gotRegion.setRegion(this.region);
 
   //Died Out Houses Filter
   
   this.diedOutHouses = ["All Houses", "Houses Died Out", "Houses Not Died Out"];
-    
+
   this.died = this.diedOutHouses[0];
+
+  //Variable to see if the view has been changed
+
+  main.viewChange = gotPassItems.getItems();
+
+  console.log(main.viewChange);
+
+  if (main.viewChange == null){
     
-  gotDiedOut.setDiedOut(this.died);
+    gotDetails.setAuthor(this.author);
+      
+    gotPublisher.setPublisher(this.publish);
+      
+    gotMedia.setMediaType(this.mediatype);
+      
+    gotDecade.setDecade(this.decade);
+      
+    gotGender.setGender(this.gender);
+    
+    gotCulture.setCulture(this.culture);
+
+    gotRegion.setRegion(this.region);
+
+    gotDiedOut.setDiedOut(this.died);
+
+  }
 
   this.allBookDetails = {};
   
@@ -99,11 +111,9 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
   
   this.allHouseDetails = {};
     
-  this.tempBookUrl;
+  this.itemUrl;
     
-  this.bookUrl;
-    
-  this.bookName;
+  this.itemName;
 
   this.hideloader = true;
 
@@ -244,7 +254,7 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
 /* Function to gather data from the api and storing them in arrays */
 
 	this.loadDetails = function() {
-	
+
       var deferred = $q.defer();    
     
 /* Service call to get data about books from api */
@@ -261,9 +271,11 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
 
           main.bookDetails = response.data;
           
-          // Sorting the books array      
+          //Sorting the books array      
           
           main.bookDetails.sort(main.compareFunction);
+
+          gotBooks.setBooks(main.bookDetails);
             
           return deferred.promise;
                 
@@ -272,7 +284,7 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
           // called asynchronously if an error occurs
           // or server returns response with an error status.
                 
-            console.log("1some error occurred. Check the console.");
+            alert("1some error occurred. Check the console.");
                 
             deferred.reject(response);
             
@@ -303,11 +315,13 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
           
                   main.characterDetails.push(response.data[key]);
                 
-                  main.characterDetails.sort(main.comparecharFunction);
-                 
                   return deferred.promise;
            
                 });
+
+                main.characterDetails.sort(main.comparecharFunction);
+
+                 gotCharacters.setCharacters(main.characterDetails);
             
             }
 
@@ -315,7 +329,7 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
                 
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-             console.log("2some error occurred. Check the console.");
+             alert("2some error occurred. Check the console.");
                 
               deferred.reject(response);
               
@@ -346,18 +360,20 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
                 
                 main.houseDetails.push(response.data[key]);
                 
-                main.houseDetails.sort(main.compareFunction);           
-     
                 return deferred.promise;
 
               });
+              
+               main.houseDetails.sort(main.compareFunction); 
 
+               gotHouses.setHouses(main.houseDetails);       
+          
           }
                     
         }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
-            console.log("3some error occurred. Check the console.");
+            alert("3some error occurred. Check the console.");
                
             deferred.reject(response);
                 
@@ -366,12 +382,12 @@ myApp.controller('mainController',['$timeout','GotService','$routeParams','$loca
         });
     }
 
-/* Use promises in order to accumulate all the arrays in one single array after the response are fetched */
+/* Use promises in order to accumulate all the arrays in one single array after the responses are fetched */
 
   let promises = [GotService.getAllBooks(),GotService.getAllCharacters(),GotService.getAllHouses()];
 
   $q.all(promises).then(main.callAtTimeout);
-    
+  
 };
 
 /* Function to collect data in single filter */
@@ -452,7 +468,7 @@ if (main.countchar >= 43) {
       
       if(main.allItems.indexOf(main.characterDetails[key]) === -1){
       
-         main.allItems.push(main.characterDetails[key]);
+        main.allItems.push(main.characterDetails[key]);
       
       }
       
@@ -478,7 +494,8 @@ if (main.countchar >= 43) {
       if(main.allItems.indexOf(main.houseDetails[key]) === -1){
 
          main.allItems.push(main.houseDetails[key]);
-
+      
+         
       } 
 
     });
@@ -492,6 +509,70 @@ if (main.countchar >= 43) {
 	main.showFilter = true;
     
   console.log(main.allItems);
+
+  //If view is changed from the Single Category view for Books to All Categories View, then state of the data is maintained
+
+  if (main.viewChange == "books") {
+
+    main.author = gotDetails.getAuthor();
+
+    main.publish = gotPublisher.getPublisher();
+
+    main.mediatype = gotMedia.getMediaType();
+
+    main.decade = gotDecade.getDecade();
+
+    main.charmodel = gotCategory.getCategory();
+
+    main.checkCategory(main.charmodel);
+
+    main.checkAuthor(main.author);
+        
+    main.checkPublisher(main.publish);
+        
+    main.checkDecade(main.decade);
+        
+    main.checkMediaType(main.mediatype);
+
+  }
+
+  //If view is changed from the Single Category view for Characters to All Categories View, then state of the data is maintained
+
+  if (main.viewChange == "characters") {
+  
+    main.charmodel = gotCategory.getCategory();
+
+    main.checkCategory(main.charmodel);
+
+    main.gender = gotGender.getGender();
+
+    main.culture = gotCulture.getCulture();
+
+    main.checkGender(main.gender);
+        
+    main.checkCulture(main.culture);
+  
+  }
+
+  //If view is changed from the Single Category view for Houses to All Categories View, then state of the data is maintained
+
+
+  if (main.viewChange == "houses") {
+  
+    main.charmodel = gotCategory.getCategory();
+
+    main.checkCategory(main.charmodel);
+
+    main.region = gotRegion.getRegion();
+
+    main.checkRegion(main.region);
+
+    main.died = gotDiedOut.getDiedOut();
+
+    main.checkDiedOut(main.died);
+
+  }
+
 }
 
 /* Function to check the status of Sort filter and display data accordingly in forward or reverse order*/
@@ -501,44 +582,31 @@ this.checkOrder = function(sortTemp) {
   if (sortTemp == "Forward") {
     
     main.bookDetails.sort(main.compareFunction);
+
+    main.characterDetails.sort(main.comparecharFunction);
+
+    main.houseDetails.sort(main.compareFunction);   
   
   }
             
   else {
     
     main.bookDetails.sort(main.compareReverse);
-  
-  }
-      
-  if (sortTemp == "Forward") {
-    
-    main.characterDetails.sort(main.comparecharFunction);
 
-  }
-            
-  else {
-                
     main.characterDetails.sort(main.comparecharReverse);
 
-  }
-
-  if (sortTemp == "Forward") {
-                
-    main.houseDetails.sort(main.compareFunction);     
-                       
-  }
-            
-  else {
-    
     main.houseDetails.sort(main.compareReverse);
   
+  
   }
-
+  
 /* Function call to show data after sorting */
 
   main.callAtTimeout();
 
 };
+
+//Check if the filter for authors is changed, if changed then filter the data accordingly
 
 this.checkAuthor = function(currentAuthor) {
         
@@ -546,11 +614,15 @@ this.checkAuthor = function(currentAuthor) {
      
 };
 
+//Check if the filter for publishers is changed, if changed then filter the data accordingly
+
 this.checkPublisher = function(currentPublisher) {
         
   gotPublisher.setPublisher(currentPublisher);
 
 };
+
+//Check if the filter for mediatypes is changed, if changed then filter the data accordingly
 
 this.checkMediaType = function(currentMediaType) {
         
@@ -558,11 +630,15 @@ this.checkMediaType = function(currentMediaType) {
      
 };
 
+//Check if the filter for decades is changed, if changed then filter the data accordingly
+
 this.checkDecade = function(currentDecade) {
         
   gotDecade.setDecade(currentDecade);
      
 };
+
+//Check if the filter for genders is changed, if changed then filter the data accordingly
 
 this.checkGender = function(currentGender) {
       
@@ -570,17 +646,23 @@ this.checkGender = function(currentGender) {
      
 };
 
+//Check if the filter for cultures is changed, if changed then filter the data accordingly
+
 this.checkCulture = function(currentCulture) {
         
   gotCulture.setCulture(currentCulture);
      
 };
 
+//Check if the filter for regions is changed, if changed then filter the data accordingly
+
 this.checkRegion = function(currentRegion) {
         
   gotRegion.setRegion(currentRegion);
      
 }
+
+//Check if the filter for died out houses is changed, if changed then filter the data accordingly
 
 this.checkDiedOut = function(currentDiedOut) {
     
@@ -596,9 +678,9 @@ this.checkCategory = function(currentCategory) {
 
   if (currentCategory == "All Categories") {
 
-    console.log("F");
+    console.log("This is All Categories.");
 
-     main.gender = "All Genders";
+    main.gender = "All Genders";
         
     main.culture = "All Cultures";
        
@@ -614,7 +696,7 @@ this.checkCategory = function(currentCategory) {
 
     main.checkDiedOut(main.died);
 
-     main.author = "All Authors";
+    main.author = "All Authors";
         
     main.publish = "All Publishers";
         
@@ -630,7 +712,6 @@ this.checkCategory = function(currentCategory) {
         
     main.checkMediaType(main.mediatype);
 
-  
   }
 	  
 	else if (currentCategory == "Books") {
@@ -684,6 +765,7 @@ this.checkCategory = function(currentCategory) {
   else if (currentCategory = 'Houses') {
         
     console.log("Hello Houses");
+  
     main.gender = "All Genders";
         
     main.culture = "All Cultures";
@@ -767,13 +849,15 @@ this.whichCategory = function(url) {
 };
 
 
-/* Function to pass data from one controller to other with the help of service */
+/* Function to pass data about Books from one controller to other with the help of service */
 
 this.passBookInfo = function(url,name,isbn,authors,numberOfPages,publisher,country,mediaType,released,characters,povchar) {
 
     main.allBookDetails.url = url;
 
     main.allBookDetails.name = name;
+
+    var tempName = name.toLowerCase().replace(/ /g,'');
 
     main.allBookDetails.isbn = isbn;
 
@@ -803,17 +887,33 @@ this.passBookInfo = function(url,name,isbn,authors,numberOfPages,publisher,count
 
     var type = "books";
 
-    main.bookUrl = $routeParams.type;
+    main.itemUrl = $routeParams.type;
+
+    main.itemName = $routeParams.tempName;
 
     gotBooks.setBooks(main.allBookDetails);
 
+    gotCategory.setCategory(main.charmodel);
+
+    gotMedia.setMediaType(main.mediatype);
+    
+    gotDecade.setDecade(main.decade);
+
+    gotDetails.setAuthor(main.author);
+
+    gotPublisher.setPublisher(main.publish);
+     
   }
+  
+  /* Function to pass data about Characters from one controller to other with the help of service */
   
   this.passCharInfo = function(url,name,gender,culture,born,died,titles,aliases,father,mother,spouse,allegiances,books,povBooks,tvSeries,playedBy) {
 	  
 	  main.allCharDetails.url = url;
 	  
 	  main.allCharDetails.name = name;
+
+    var tempName = name.toLowerCase().replace(/ /g,'');
 	  
 	  main.allCharDetails.gender = gender;
 
@@ -855,17 +955,29 @@ this.passBookInfo = function(url,name,isbn,authors,numberOfPages,publisher,count
 
 	  var type = "characters";
 
-	  main.charUrl = $routeParams.type;
+	  main.itemUrl = $routeParams.type;
+
+    main.itemName = $routeParams.tempName;
 
     gotCharacters.setCharacters(main.allCharDetails);
+
+    gotCategory.setCategory(main.charmodel);
+
+    gotGender.setGender(main.gender);
+
+    gotCulture.setCulture(main.culture);
 	   
   }
+
+  /* Function to pass data about Houses from one controller to other with the help of service */
   
   this.passHouseInfo = function(url,name,region,coatOfArms,words,titles,seats,currentLord,heir,overlord,founded,founder,diedOut,ancestralWeapons,cadetBranches,swornMembers) {
 	  
 	  main.allHouseDetails.url = url;
 	  
 	  main.allHouseDetails.name = name;
+
+    var tempName = name.toLowerCase().replace(/ /g,'');
 	  
 	  main.allHouseDetails.region = region;
 	  
@@ -905,10 +1017,18 @@ this.passBookInfo = function(url,name,isbn,authors,numberOfPages,publisher,count
 	  
 	  var type = "houses";
 
-	  main.charUrl = $routeParams.type;
+	  main.itemUrl = $routeParams.type;
+
+    main.itemName = $routeParams.tempName;
     
     gotHouses.setHouses(main.allHouseDetails);
+
+    gotCategory.setCategory(main.charmodel);
+
+    gotRegion.setRegion(main.region);
+
+    gotDiedOut.setDiedOut(main.died);
 	   
   }
-
+  
 }]); // end controller

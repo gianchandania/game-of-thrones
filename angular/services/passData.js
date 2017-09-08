@@ -308,3 +308,47 @@ myApp.factory('gotWhichCategory', function() {
 	}
 
 });
+
+myApp.factory('gotPassItems', function() {
+	
+	var givenData = null;
+
+	return {
+
+		getItems:function() {
+	
+			return givenData;
+	
+		},
+	
+		setItems:function(value) {
+	
+			givenData = value;
+		
+		}
+	
+	}
+
+});
+
+myApp.factory('gotOrder', function() {
+	
+	var givenOrder = null;
+
+	return {
+
+		getOrder:function() {
+	
+			return givenData;
+	
+		},
+	
+		setOrder:function(value) {
+	
+			givenData = value;
+		
+		}
+	
+	}
+
+});

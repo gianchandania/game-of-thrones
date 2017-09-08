@@ -185,12 +185,6 @@ myApp.filter('genderFilter',['gotCulture','gotGender','gotCategory', function(go
       
       (out[0] = titleChar);
       
-      //console.log(out[0]);
-      
-      //console.log(titleChar);
-      
-      //(givenCulture != 'All Cultures')?(out[0] = input[0]):'';
-      
       angular.forEach(input, function(currentFactor,key1){
 
         (currentFactor.gender != undefined && currentFactor.gender === searchGender)?out.push(currentFactor):'';
@@ -231,8 +225,6 @@ myApp.filter('cultureFilter',['gotCulture','gotGender','gotCategory', function(g
       var titleChar = input[13];
       
       (out[0] = titleChar);
-    
-     // (givenGender != 'All Genders')?(out[0] = input[0]):'';
       
       angular.forEach(input, function(currentFactor,key1){
         

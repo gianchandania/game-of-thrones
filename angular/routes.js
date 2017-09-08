@@ -24,7 +24,7 @@ myApp.config(['$routeProvider', function($routeProvider){
         
         })
         
-        .when('/allinfo/:bookUrl-:bookName',{
+        .when('/allinfo/:itemUrl-:itemName',{
         
             templateUrl     : 'views/singleitem-view.html',
         

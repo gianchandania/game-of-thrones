@@ -1,6 +1,6 @@
 /*Controller for the Single Category View*/
 
-myApp.controller('singleItemController',['$http','$routeParams','gotBooks','gotCharacters','gotHouses','gotWhichCategory', function($http,$routeParams,gotBooks,gotCharacters,gotHouses,gotWhichCategory) { 
+myApp.controller('singleItemController',['$http','$routeParams','gotBooks','gotCharacters','gotHouses','gotWhichCategory','gotDecade','gotDetails','gotPublisher','gotMedia','gotCategory','gotOrder','gotPassItems','gotGender','gotCulture','gotRegion','gotDiedOut', function($http,$routeParams,gotBooks,gotCharacters,gotHouses,gotWhichCategory,gotDecade,gotDetails,gotPublisher,gotMedia,gotCategory,gotOrder,gotPassItems,gotGender,gotCulture,gotRegion,gotDiedOut) { 
 
 //create a context
 	var main = this;
@@ -41,6 +41,28 @@ myApp.controller('singleItemController',['$http','$routeParams','gotBooks','gotC
 
   this.showDiv = false;
 
+  this.category;
+
+  this.decade;
+
+  this.author;
+
+  this.publisher;
+
+  this.mediatype;
+
+  this.gender;
+
+  this.culture;
+
+  this.diedout;
+
+  this.region;
+
+  this.transfer;
+
+  this.sort;
+
   this.clickOnMore = function() {
       
     this.showDiv = true;
@@ -60,6 +82,8 @@ myApp.controller('singleItemController',['$http','$routeParams','gotBooks','gotC
   this.loadInfoBooks = function() {
 
 		//Get details of books from the mainController using a service
+
+    main.transfer = "books";
 		
     main.bookDetails =  gotBooks.getBooks();
   
@@ -99,9 +123,37 @@ myApp.controller('singleItemController',['$http','$routeParams','gotBooks','gotC
 
     }
 
-  }
+    // To get data from the main controller and send it back when view is changed in order to maintain the state of the data
+
+    main.decade = gotDecade.getDecade();
+
+    main.publisher = gotPublisher.getPublisher();
+
+    main.mediatype = gotMedia.getMediaType();
+
+    main.author = gotDetails.getAuthor();
+
+    main.category = gotCategory.getCategory();
+
+    gotDecade.setDecade(main.decade);
+
+    gotPublisher.setPublisher(main.publisher);
+
+    gotMedia.setMediaType(main.mediatype);
+
+    gotDetails.setAuthor(main.author);
+
+    gotCategory.setCategory(main.category);
+
+    gotPassItems.setItems(main.transfer);
+  
+}
 
   this.loadInfoChar = function() {
+
+    //Get details of characters from the mainController using a service
+
+    main.transfer = "characters";
 		
 		main.charDetails = gotCharacters.getCharacters();
 
@@ -178,9 +230,29 @@ myApp.controller('singleItemController',['$http','$routeParams','gotBooks','gotC
 
     });
 
-  }
+   // To get data from the main controller and send it back when view is changed in order to maintain the state of the data
+
+   main.culture = gotCulture.getCulture();
+
+   main.gender = gotGender.getGender();
+
+   main.category = gotCategory.getCategory();
+
+   gotCategory.setCategory(main.category);
+
+   gotGender.setGender(main.gender);
+
+   gotCulture.setCulture(main.culture);
+
+   gotPassItems.setItems(main.transfer);
+
+}
 		
     this.loadInfoHouses = function() {
+
+      //Get details of houses from the mainController using a service
+
+      main.transfer = "houses";
 	   
      	main.houseDetails = gotHouses.getHouses();
 
@@ -251,6 +323,22 @@ myApp.controller('singleItemController',['$http','$routeParams','gotBooks','gotC
         }
 
       });
+
+      // To get data from the main controller and send it back when view is changed in order to maintain the state of the data
+
+      main.category = gotCategory.getCategory();
+
+      gotCategory.setCategory(main.category);
+
+      main.region = gotRegion.getRegion();
+
+      main.diedout = gotDiedOut.getDiedOut();
+
+      gotRegion.setRegion(main.region);
+
+      gotDiedOut.setDiedOut(main.diedout);
+
+      gotPassItems.setItems(main.transfer);
     
   }
 
